@@ -1,0 +1,13 @@
+interface Tower {
+    // Height of the tower in feet
+    int HEIGHT = 30;
+    
+    // Circumference of the tower in feet
+    int CIRCUMFERENCE = 12;
+    
+    // Method to get the height of the tower
+    int getHeight();
+    
+    // Method to get the circumference of the tower
+    int getCircumference();
+}

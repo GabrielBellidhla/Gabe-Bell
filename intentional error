@@ -1,0 +1,23 @@
+def main():
+    # Array Out-of-Bounds Error
+    try:
+        # Define a small array
+        array = [1, 2, 3]
+        # Access an invalid index
+        print(array[5])
+    except IndexError:
+        print("Error: Tried to access an invalid index in the array.")
+    
+    # Division by Zero Error
+    try:
+        # Perform division by zero
+        result = 10 / 0
+    except ZeroDivisionError:
+        print("Error: Tried to divide by zero.")
+    
+    # Indicate program ended without crashing
+    print("Program caught the errors and closed without crashing.")
+
+# Run the program
+if __name__ == "__main__":
+    main()

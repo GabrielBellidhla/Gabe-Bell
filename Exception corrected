@@ -1,0 +1,24 @@
+public class ErrorHandlingExample {
+    public static void main(String[] args) {
+        // Array example to cause an ArrayIndexOutOfBoundsException
+        try {
+            int[] array = {1, 2, 3};
+            // Access an invalid index (out of bounds)
+            int invalidIndexValue = array[3];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // Print a friendly error message
+            System.out.println("Error: Tried to access an array index that doesn't exist.");
+        }
+        
+        // Division example to cause an ArithmeticException
+        try {
+            int result = 10 / 0;
+        } catch (ArithmeticException e) {
+            // Print a friendly error message
+            System.out.println("Error: Division by zero is not allowed.");
+        }
+        
+        // Continue the program execution
+        System.out.println("Program caught the errors and closed without crashing.");
+    }
+}

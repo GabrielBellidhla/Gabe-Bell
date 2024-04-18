@@ -1,0 +1,18 @@
+interface Tower {
+    int HEIGHT = 30;
+    int CIRCUMFERENCE = 12;
+    default int getHeight() {
+        return HEIGHT;
+    }
+    default int getCircumference() {
+        return CIRCUMFERENCE;
+    }
+}
+
+ class Main {
+    public static void main(String[] args) {
+        Tower tower = new Tower() {};
+        System.out.println("Height: " + tower.getHeight());
+        System.out.println("Circumference: " + tower.getCircumference());
+    }
+}

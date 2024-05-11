@@ -1,0 +1,101 @@
+mport java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+// Represents a playing card
+class Card {
+    private final String rank;
+    private final String suit;
+
+    public Card(String rank, String suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+
+    @Override
+    public String toString() {
+        return rank + " of " + suit;
+    }
+
+    public String getSuit() {
+        return suit;
+    }
+}
+
+public class CardGame {
+
+    public static void main(String[] args) {
+        List<Card> deck = initializeDeck();
+        shuffleDeck(deck);
+
+        List<List<Card>> playerHands = dealCards(deck, 4);
+
+        int[] heartCounts = new int[4];
+        for (int i = 0; i < 4; i++) {
+            heartCounts[i] = countHearts(playerHands.get(i));
+            System.out.println("Player " + (i + 1) + " has " + heartCounts[i] + " hearts.");
+        }
+
+        int winningPlayer = findWinner(heartCounts);
+        System.out.println("Player " + (winningPlayer + 1) + " wins with " + heartCounts[winningPlayer] + " hearts!");
+    }
+
+    // Initialize a deck of 52 cards
+    private static List<Card> initializeDeck() {
+        List<Card> deck = new ArrayList<>();
+        String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
+        String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
+
+        for (String suit : suits) {
+            for (String rank : ranks) {
+                deck.add(new Card(rank, suit));
+            }
+        }
+
+        return deck;
+    }
+
+    // Shuffle the deck of cards
+    private static void shuffleDeck(List<Card> deck) {
+        Collections.shuffle(deck, new Random());
+    }
+
+    // Deal the deck of cards among the specified number of players
+    private static List<List<Card>> dealCards(List<Card> deck, int numPlayers) {
+        List<List<Card>> playerHands = new ArrayList<>();
+        for (int i = 0; i < numPlayers; i++) {
+            playerHands.add(new ArrayList<>());
+        }
+
+        for (int i = 0; i < deck.size(); i++) {
+            playerHands.get(i % numPlayers).add(deck.get(i));
+        }
+
+        return playerHands;
+    }
+
+    // Count the number of hearts in a list of cards
+    private static int countHearts(List<Card> cards) {
+        int count = 0;
+        for (Card card : cards) {
+            if (card.getSuit().equals("Hearts")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    // Find the index of the player with the maximum heart count
+    private static int findWinner(int[] heartCounts) {
+        int maxHearts = -1;
+        int winningPlayer = -1;
+        for (int i = 0; i < heartCounts.length; i++) {
+            if (heartCounts[i] > maxHearts) {
+                maxHearts = heartCounts[i];
+                winningPlayer = i;
+            }
+        }
+        return winningPlayer;
+    }
+}
